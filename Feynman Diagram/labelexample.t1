@@ -1,0 +1,9 @@
+% labelexample.t1 -- generated automatically from labelexample.log
+% Think twice before editing THIS file!
+\fmfL(60.99992,29.99998,l){$\frac {ig_{\mu \nu }}{q^2+i\epsilon }$}
+\fmfL(6.04337,-3.38004,rt){$u(p_1)$}
+\fmfL(6.04337,63.38004,rb){$u(p_2)$}
+\fmfL(103.95663,-3.38004,lt){$\bar {u}(p_3)$}
+\fmfL(103.95663,63.38004,lb){$\bar {u}(p_4)$}
+\fmfL(54.99997,50.99998,b){$ie\gamma _\nu $}
+\fmfL(54.9999,8.99997,t){$ie\gamma _\mu $}

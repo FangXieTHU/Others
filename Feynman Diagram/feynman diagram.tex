@@ -16,11 +16,11 @@
 \usepackage{indentfirst}
 \usepackage{wrapfig}
 \usepackage{feynmf}
+\usepackage{mflogo}
 
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
 
 \linespread{1.1}
-
 
 \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
 
@@ -29,7 +29,7 @@
 
 \title{\bf{在\LaTeX 中使用$\mathbf{feynmf}$宏包绘制费曼图}}
 
-\author{\emph{清华大学\, 物理系 \, 解放}}
+\author{\emph{清华大学物理系\, 解放\, 肖煌煜}}
 \date{}
 \begin{document}
 \maketitle
@@ -41,11 +41,7 @@
 
 \section{绘制}
 \subsection{基本的绘制方法}
-绘制费曼图, 第一步是调用 feynmf 宏包: 在导言区加入
-\begin{verbatim}
-\usepackage{feynmf}
-\end{verbatim}
-然后当我们需要插入一张费曼图时, 可以引入一个环境 fmffile 并加上一个命名\#\#\#(可以替换为合适的名称, 如 graph1, graph2...),在这个环境里面再调用 fmfgraph 环境, 就可以进行费曼图的绘制了. 写法如下:
+绘制费曼图, 第一步是调用 feynmf 宏包: 在导言区加入\verb+\usepackage{feynmf}+, 然后当我们需要插入一张费曼图时, 可以引入一个环境 fmffile 并加上一个命名\verb+###+(可以替换为合适的名称, 如 graph1, graph2...),在这个环境里面再调用 fmfgraph 环境, 就可以进行费曼图的绘制了. 写法如下:
 \begin{verbatim}
 \begin{fmffile}{###}
   \begin{fmfgraph}(x,y)
@@ -55,12 +51,12 @@
 \end{verbatim}
 其中小括号内的数字描述的是整张费曼图的大小.
 
-首先可以定义整张图左侧和右侧的外点, 然后通过光子线, 费米子线, 标量粒子线等等, 将外点和内点连接起来就得到一张费曼图. 定义左侧外点的指令是\verb+\fmfleft{i1,i2,...}+; 定义右侧外点的指令是\verb+\fmfright{o1,o2,...}+; 图内顶点不需要专门声明, 在连传播子的指令中出现就可以;光子线,费米子线等等传播子可以用\verb+\fmf{photon}{v1,o2}+或者类似\verb+\fmf{fermion}{i1,v1,o1}+等写法来连接不同的外点和顶点. 对于标量可以使用\verb+\fmf{plain}{i1,v1}+, \verb+\fmf{scalar}{i1,v1}+或者\verb+\fmf{dashes}{i1,v1}+等写法. \verb+plain+表示的是没有箭头的实线, 实空间中的标量场常采用这种记号; \verb+scalar+是加了箭头的虚线, 常用于动量空间中的标量场; \verb+dashes+就是没有箭头的虚线. 其他传播子的具体写法在后面会有表格总结. 
+首先可以定义整张图左侧和右侧的外点, 然后通过光子线, 费米子线, 标量粒子线等等, 将外点和内点连接起来就得到一张费曼图. 定义左侧外点的指令是 \verb+\fmfleft{i1,i2,...}+; 定义右侧外点的指令是 \verb+\fmfright{o1,o2,...}+; 图内顶点不需要专门声明, 在连传播子的指令中出现就可以; 光子线,费米子线等等传播子可以用 \verb+\fmf{photon}{v1,o2}+ 或者类似 \verb+\fmf{fermion}{i1,v1,o1}+ 等写法来连接不同的外点和顶点. 对于标量可以使用 \verb+\fmf{plain}{i1,v1}+, \verb+\fmf{scalar}{i1,v1}+ 或者 \verb+\fmf{dashes}{i1,v1}+等写法. \verb+plain+ 表示的是没有箭头的实线, 实空间中的标量场常采用这种记号; \verb+scalar+ 是加了箭头的虚线, 常用于动量空间中的标量场; \verb+dashes+ 就是没有箭头的虚线. 其他传播子的具体写法在后面会有表格总结. 
 
 最后再介绍几个常用的参数和指令的用法:
 \begin{itemize}
 \item \verb+\fmf{fermion,tension=1/3}+ 表示将费米子线的"张力"调整为原来的$1/3$. 由于绘制费曼图时各条线之间的夹角是由各线上的``张力平衡''给出的, 因此有时需要调整张力使得图形更美观. 默认值为1.
-\item \verb+\fmf{fermion,left=1}+ 表示将这条线画成半圆. 这在绘制圈图时非常常用. \verb+left+ 和\verb+right+分别表示像两个方向弯曲的园弧线, 参数值表示圆弧占圆周的比例, 默认值为1, 表示半圆.
+\item \verb+\fmf{fermion,left=1}+ 表示将这条线画成半圆. 这在绘制圈图时非常常用. \verb+left+ 和 \verb+right+ 分别表示像两个方向弯曲的园弧线, 参数值表示圆弧占圆周的比例, 默认值为1, 表示半圆.
 \item \verb+\fmfdot{v1}+ 可以用来将顶点加粗强调.
 \end{itemize}
 
@@ -76,13 +72,13 @@
 ...
 \end{fmffile}
 \end{verbatim}
-并编译之后, .tex 文档所在的文件夹下面会一组由 \#\#\# 命名的文档, 所以说绘制多个费曼图时, 记得 \#\#\# 的命名不要重复.
-\item 如果某一个费曼图的画法写错了而又完成了两次编译, 则此时需要到 .tex 文档所在的文件夹中删除与这幅图相关的那些文件的内容. 修改费曼图的画法之后再进行编译, 可以将其修正.
+并编译之后, \verb+.tex+ 文档所在的文件夹下面会一组由 \verb+###+ 命名的文档, 所以说绘制多个费曼图时, 记得 \verb+###+ 的命名不要重复.
+\item 如果某一个费曼图的画法写错了而又完成了两次编译, 则此时需要到 \verb+.tex+ 文档所在的文件夹中删除与这幅图相关的那些文件的内容. 修改费曼图的画法之后再进行编译, 可以将其修正.
 \end{itemize}
 
 \section{样例}
 \subsection{作为浮动体插入费曼图}
-在这一段我们以$e^{-}\gamma\rightarrow e^{-}\gamma$ 树图阶康普顿散射为例, 示范如何绘制作为图片插入费曼图.\\
+在这一段我们以$e^{-}\gamma\rightarrow e^{-}\gamma$树图阶康普顿散射为例, 示范如何绘制作为图片插入费曼图.\\
 示范代码:
 \begin{verbatim}
 \begin{figure}[!htp]
@@ -114,7 +110,7 @@
 \end{fmffile}
 \caption{A scattering process (u-channel) of Campton experiment}
 \end{figure}\\
-此时我们就得到了第一张费曼图. 注意在我们的代码中, 左侧外点\verb+i1+ 连接的是光子, 而左侧外点\verb+i2+连接的是电子. 从图中可以看出, 外点是按从下到上排列的. 右侧外点的情况也是一样的. 在后面的例子中我们也会发现相同的现象.
+此时我们就得到了第一张费曼图. 注意在我们的代码中, 左侧外点 \verb+i1+ 连接的是光子, 而左侧外点 \verb+i2+ 连接的是电子. 从图中可以看出, 外点是按从下到上排列的. 右侧外点的情况也是一样的. 在后面的例子中我们也会发现相同的现象.
 
 \subsection{圈图}
 圈图的画法有一些需要注意的地方, 因此单独拿出一节来讨论. 下面还是以一些例子来解释圈图的画法.
@@ -133,7 +129,7 @@
   \end{fmfgraph}
 \end{fmffile}
 \end{verbatim}
-注意到\verb+\fmfdot{}+指令: 此处我们已经将所有的顶点加粗. 输出效果如下图所示:
+注意到 \verb+\fmfdot{}+ 指令: 此处我们已经将所有的顶点加粗. 输出效果如下图所示:
 \begin{figure}[!htp]
 \centering
 \begin{fmffile}{graph2}
@@ -178,7 +174,7 @@
 \end{fmffile}
 \caption{\emph{$\phi^4$标量场的真空极化}}
 \end{figure}\\
-这里可以看出, 对于两端连在一起的传播子, 并不需要特别的设置就可以了. 如果把上面例子中的\verb+plain+换成\verb+scalar+, 就是动量\newpage 空间中的标量场自作用图了:
+这里可以看出, 对于两端连在一起的传播子, 并不需要特别的设置就可以了. 如果把上面例子中的 \verb+plain+ 换成 \verb+scalar+, 就是动\\ \\ \\ \\量空间中的标量场自作用图了:
 \begin{figure}[!htp]
 \centering
 \begin{fmffile}{auxgraph1}
@@ -221,7 +217,7 @@
 \end{figure}
 
 \subsubsection{光子真空极化}
-两顶点的圈图比较特殊, 需要把连线画成弯曲的, 因此直接套用树图的画法是不行的. 首先看下面一段 TeX 代码:
+两顶点的圈图比较特殊, 需要把连线画成弯曲的, 因此直接套用树图的画法是不行的. 首先看下面一段 \TeX 代码:
 \begin{verbatim}
     \fmfleft{i1}
     \fmfright{o1}
@@ -242,7 +238,7 @@
   \end{fmfgraph}
 \end{fmffile}
 \end{figure}\\
-可见, 通过上述写法得到的费曼图是不行的, 两条直的费米子线重叠在一起了. 因此这时需要使用 \verb+left+或\verb+right+指令. 最简单的情况如下:
+可见, 通过上述写法得到的费曼图是不行的, 两条直的费米子线重叠在一起了. 因此这时需要使用 \verb+left+或 \verb+right+指令. 最简单的情况如下:
 \begin{verbatim}
 \begin{fmffile}{graph5}
   \begin{fmfgraph}(110,60)
@@ -268,7 +264,7 @@
 \end{fmffile}
 \caption{\emph{光子真空极化}}
 \end{figure}
-\\如果调节上述指令中的\verb+\left+参数值, 费曼图会发生如下变化:
+\\如果调节上述指令中的 \verb+left+参数值, 费曼图会发生如下变化:
 \begin{figure}[!htp]
 \centering
 \begin{fmffile}{auxgraph3}
@@ -288,7 +284,7 @@
  \end{fmfgraph}
 \end{fmffile}
 \end{figure}\\
-左侧费曼图的参数\verb+left=0.5+, 右侧费曼图的参数\verb+left=1.5+.
+左侧费曼图的参数 \verb+left=0.5+, 右侧费曼图的参数 \verb+left=1.5+.
 
 \subsubsection{电子自能}
 电子自能图一般不会把电子线画成弯的, 因为这样会使得费曼图很不美观. 我们一般将其分成三段来画:
@@ -299,7 +295,7 @@
    \fmfright{o1}
    \fmf{plain}{i1,v1}
    \fmf{fermion}{v1,v2}
-   \fmf{photon,left}{v1,v2}
+   \fmf{photon,left,tension=0}{v1,v2}
    \fmf{plain}{v2,o1}
  \end{fmfgraph}
 \end{fmffile}
@@ -313,13 +309,13 @@
    \fmfright{o1}
    \fmf{plain}{i1,v1}
    \fmf{fermion}{v1,v2}
-   \fmf{photon,left}{v1,v2}
+   \fmf{photon,left,tension=0}{v1,v2}
    \fmf{plain}{v2,o1}
  \end{fmfgraph}
 \end{fmffile}
 \caption{\emph{电子的自能图}}
 \end{figure}\\
-这时候由于变成了三根线, 需要考虑到\verb+tension+参数的影响了. QED 中的一个顶点会连接一进一出的两个电子线和一个光子线. 如果某一条电子线换成自能图, 那该怎么写? 顺着上面例子的思路, 似乎可以写出如下的指令:
+这时候由于变成了三根线, 需要考虑到 \verb+tension+参数的影响了. 此处将光子线的张力设为零, 这条线就不至于缩得太短, 也不会对下面费米子线的绘制造成影响. QED 中的一个顶点会连接一进一出的两个电子线和一个光子线. 如果某一条电子线换成自能图, 那该怎么写? 顺着上面例子的思路, 似乎可以写出如下的指令:
 \begin{verbatim}
     \fmfleft{i1,i2}
     \fmfright{o1}
@@ -412,15 +408,69 @@
 \end{fmffile}
 最常用的几类费曼图的画法大概就是这样.
 \newpage
-\section{附录: 关于不同的传播子的指令}
-作者偷懒, 截图示意了:
+\section{不同传播子的指令}
+如下表所示, 费曼图中的各种相互作用线可以通过相应的指令进行输出.
 \begin{figure}[!htp]
 \centering
-\includegraphics[width=15cm]{propagator.png}
+\includegraphics[width=13cm]{propagator.png}
 \caption{\emph{各种各样的传播子}}
 \end{figure}
 
-关于费曼图的绘制还有很多需要注意的地方, 比如说为传播子和顶点添加标记, 其他形状的(例如多边形)顶点等等.更详细的说明应该去参考\TeX 文档中关于 fenmf 宏包的部分.
+\section{添加标签}
+在这个章节中我们示范一下如何为费曼图中的连线和顶点添加标签, 以电子散射过程的树图为例子. 首先标上虚光子的传播子, 需要在光子线的指令中加上 \verb+label=+$\langle label\rangle$ 参数 (此处需要注意, 指定 \verb+label+ 的值时, \verb+label+ 和等号之间不能有空格!) ;再为上顶点加上 $ie\gamma^\mu$, $u(p_1)$ 以及 $\bar{u}(p_3)$ 等指标, 此时可以使用 \verb+\fmflabel{+$\langle label \rangle$\verb+}{+$\langle vertex\rangle$\verb+}+ 指令来为顶点$\langle vertex \rangle$ 添加标签.
+
+看下面的简单例子:
+\begin{verbatim}
+\begin{fmffile}{labelexample}
+  \begin{fmfgraph*}(110,60)
+    \fmfleft{i1,i2}
+    \fmfright{o1,o2}
+    \fmf{fermion}{i2,v2,o2}
+    \fmf{fermion}{i1,v1,o1}
+    \fmf{photon,label=$\frac{ig_{\mu\nu}}{q^2+i\epsilon}$}{v1,v2}
+    \fmflabel{$ie\gamma_\mu$}{v1}
+    \fmflabel{$ie\gamma_\nu$}{v2}
+    \fmflabel{$u(p_1)$}{i1}
+    \fmflabel{$u(p_2)$}{i2}
+    \fmflabel{$\bar{u}(p_3)$}{o1}
+    \fmflabel{$\bar{u}(p_4)$}{o2}
+  \end{fmfgraph*}
+\end{fmffile}
+\end{verbatim}
+当输入了如下的代码之后: 
+\begin{itemize}
+\item 先进行一轮 \LaTeX 的编译, 如同之前的例子中一样,会在你的 \verb+.tex+ 文档所在的文件夹中生成一个 \verb+.mf+ 文档, 且该文档的名称就是你的费曼图文件的名称. 在上面的例子中, 生成的文件就是 \verb+labelexample.mf+ . 
+\item 下面不要急着进行第二次编译. 如果你的 \TeX 编辑器支持直接调用 \MF, 那就直接打开生成的 \verb+.mf+ 文件并进行编译; 如果你的 \TeX 编辑器像 TeXShop 一样不支持直接使用 \MF 的话, 那就使用终端进行调用. 首先找到 \verb+.mf+ 文件所在的文件夹, 然后执行命令 \verb+mf labelexample.mf+. 此过程会生成一个 \verb+.*gf+ 和一个 \verb+.log+ 文件. 如图所示, 执行这个指令之后给出如下的信息:
+\begin{figure}[!htp]
+\centering
+\includegraphics[width=9cm]{labelter1.png}
+\caption{\emph{执行mf指令之后}}
+\end{figure}
+\item 此时再进行一次对于原 \verb+.tex+ 文档的 \TeX 编译, 就能得到带有标签的费曼图了.
+
+\end{itemize}
+最终得到的结果如下图所示:
+\begin{figure}[!htp]
+\centering
+\begin{fmffile}{labelexample}
+  \begin{fmfgraph*}(110,60)
+    \fmfleft{i1,i2}
+    \fmfright{o1,o2}
+    \fmf{fermion}{i2,v2,o2}
+    \fmf{fermion}{i1,v1,o1}
+    \fmf{photon,label=$\frac{ig_{\mu\nu}}{q^2+i\epsilon}$}{v1,v2}
+    \fmflabel{$ie\gamma_\mu$}{v1}
+    \fmflabel{$ie\gamma_\nu$}{v2}
+    \fmflabel{$u(p_1)$}{i1}
+    \fmflabel{$u(p_2)$}{i2}
+    \fmflabel{$\bar{u}(p_3)$}{o1}
+    \fmflabel{$\bar{u}(p_4)$}{o2}
+  \end{fmfgraph*}
+\end{fmffile}
+\caption{\emph{添加了标签的费曼图}}
+\end{figure}
+\\
+关于费曼图宏包 feynmf 的主要用法大概就是上面所列出的. 此外还有一些功能比如绘制多边形顶点等功能, 应参阅 \TeX 宏包的官方文档(在终端中执行指令 \verb+texdoc feynmf+ 就可以查看了).
 \end{document}
 
 
