@@ -407,14 +407,6 @@
   \end{eqnarray}
 \end{fmffile}
 最常用的几类费曼图的画法大概就是这样.
-\newpage
-\section{不同传播子的指令}
-如下表所示, 费曼图中的各种相互作用线可以通过相应的指令进行输出.
-\begin{figure}[!htp]
-\centering
-\includegraphics[width=13cm]{propagator.png}
-\caption{\emph{各种各样的传播子}}
-\end{figure}
 
 \section{添加标签}
 在这个章节中我们示范一下如何为费曼图中的连线和顶点添加标签, 以电子散射过程的树图为例子. 首先标上虚光子的传播子, 需要在光子线的指令中加上 \verb+label=+$\langle label\rangle$ 参数 (此处需要注意, 指定 \verb+label+ 的值时, \verb+label+ 和等号之间不能有空格!) ;再为上顶点加上 $ie\gamma^\mu$, $u(p_1)$ 以及 $\bar{u}(p_3)$ 等指标, 此时可以使用 \verb+\fmflabel{+$\langle label \rangle$\verb+}{+$\langle vertex\rangle$\verb+}+ 指令来为顶点$\langle vertex \rangle$ 添加标签.
@@ -437,7 +429,7 @@
   \end{fmfgraph*}
 \end{fmffile}
 \end{verbatim}
-当输入了如下的代码之后: 
+当输入了上述的代码之后: 
 \begin{itemize}
 \item 先进行一轮 \LaTeX 的编译, 如同之前的例子中一样,会在你的 \verb+.tex+ 文档所在的文件夹中生成一个 \verb+.mf+ 文档, 且该文档的名称就是你的费曼图文件的名称. 在上面的例子中, 生成的文件就是 \verb+labelexample.mf+ . 
 \item 下面不要急着进行第二次编译. 如果你的 \TeX 编辑器支持直接调用 \MF, 那就直接打开生成的 \verb+.mf+ 文件并进行编译; 如果你的 \TeX 编辑器像 TeXShop 一样不支持直接使用 \MF 的话, 那就使用终端进行调用. 首先找到 \verb+.mf+ 文件所在的文件夹, 然后执行命令 \verb+mf labelexample.mf+. 此过程会生成一个 \verb+.*gf+ 和一个 \verb+.log+ 文件. 如图所示, 执行这个指令之后给出如下的信息:
@@ -471,6 +463,15 @@
 \end{figure}
 \\
 关于费曼图宏包 feynmf 的主要用法大概就是上面所列出的. 此外还有一些功能比如绘制多边形顶点等功能, 应参阅 \TeX 宏包的官方文档(在终端中执行指令 \verb+texdoc feynmf+ 就可以查看了).
+\newpage
+\section{附表: 不同传播子的指令}
+如下表所示, 费曼图中的各种相互作用线可以通过相应的指令进行输出.
+\begin{figure}[!htp]
+\centering
+\includegraphics[width=13cm]{propagator.png}
+\caption{\emph{各种各样的传播子}}
+\end{figure}
+
 \end{document}
 
 
